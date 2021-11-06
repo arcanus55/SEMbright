@@ -1,0 +1,10 @@
+{
+    "baseURL": "https://SEMbright.com/",
+    "languageCode": "en-us",
+    "title": "SEMbright",
+    "taxonomies": {
+      "category": "categories",
+      "tag": "tags",
+      "skill": "skills"
+   }
+ }
