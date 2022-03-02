@@ -64,7 +64,8 @@ class SEMbright {
       //  Request CSS (gh-pages?)
       //  If N55 else request N55
       //  Might want to point to the CDN at some point
-      sembUtils.fAsyncJS( document, "https://arcanus55.github.io/neodigm55/dist/neodigm55_v1_9.js", true, function(){
+      sembUtils.fAsyncJS( document, "SEMbright_DLA_v0_1_0.css", false, function(){
+        sembUtils.fAsyncJS( document, "https://arcanus55.github.io/neodigm55/dist/neodigm55_v1_9.js", true, function(){
         sembUtils.fAsyncJS( document, "https://arcanus55.github.io/neodigm55/dist/neodigm55_v1_9.css", false, function(){
           if( doDOMContentLoaded ){
             doDOMContentLoaded()
@@ -73,6 +74,7 @@ class SEMbright {
           }
         })
       })
+    })
     }
     init () {
         this.bIsInit = true
