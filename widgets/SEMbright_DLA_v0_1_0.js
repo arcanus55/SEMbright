@@ -66,10 +66,11 @@ class SEMbright {
       //  Might want to point to the CDN at some point
       sembUtils.fAsyncJS( document, "https://arcanus55.github.io/neodigm55/dist/neodigm55_v1_9.js", true, function(){
         sembUtils.fAsyncJS( document, "https://arcanus55.github.io/neodigm55/dist/neodigm55_v1_9.css", false, function(){
-          console.log("ducks")
-          //window.doDOMContentLoaded()
-  if( doDOMContentLoaded ) doDOMContentLoaded()
-
+          if( doDOMContentLoaded ){
+            doDOMContentLoaded()
+            if( neodigmSodaPop ) neodigmSodaPop.autoOpen("semb--wdla__id")
+            
+          }
         })
       })
     }
@@ -86,7 +87,7 @@ let sembright = new SEMbright( document, ["neodigm-claire"] )
 
 document.addEventListener("DOMContentLoaded", function(ev) {
   const neodigmMU = `
-   <template id="semb--wdla__id" data-n55-sodapop-modal="false" 
+   <template id="semb--wdla__id" data-n55-sodapop-modal="true" 
   data-n55-sodapop-size="medium">
   
   YOUR CONTENT HERE
