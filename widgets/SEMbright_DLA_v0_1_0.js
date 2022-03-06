@@ -70,7 +70,30 @@ class SEMbright {
           if( doDOMContentLoaded ){
             doDOMContentLoaded()
             if( neodigmSodaPop ) neodigmSodaPop.autoOpen("semb--wdla__id")
+
+            var formdata = new FormData();
+            formdata.append("first_name", "Moxy");
+            formdata.append("email", "dduck@pocketlint2.com");
+            formdata.append("password", "swordfish");
+            formdata.append("primary_domain", "www.pocketlint2.com");
+            formdata.append("last_name", "duck");
             
+            var requestOptions = {
+              method: 'POST',
+              body: formdata,
+              redirect: 'follow',
+              headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Request-Origin': '*'
+              }
+            };
+            
+            fetch("http://52.201.217.116/dla/v010/users", requestOptions)
+              .then(response => response.text())
+              .then(result => console.log(result))
+              .catch(error => console.log('error', error));            
+
+
           }
         })
       })
@@ -84,7 +107,7 @@ class SEMbright {
     play (){ this.bIsPause = false; return this; }
     setTheme (){ if( this.bIsInit ){ return this; } }
 }
-let sembright = new SEMbright( document, ["neodigm-claire"] )
+let sembright = new SEMbright( document, ["neodigm-qqqq"] )
 
 
 document.addEventListener("DOMContentLoaded", function(ev) {
@@ -101,5 +124,5 @@ document.addEventListener("DOMContentLoaded", function(ev) {
   setTimeout( ()=>{
     sembright.preInit()
     if( sembOpt.CONSOLE_LOG_VER ) console.log("%c SEMbright White-label Digital Landscape Audit ✨ v" + sembUtils.ver, "background: #000; color: #F5DF4D; font-size: 20px");
-  }, 56)
+  }, 5600)
 });
