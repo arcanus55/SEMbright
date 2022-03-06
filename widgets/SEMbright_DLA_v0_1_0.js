@@ -87,13 +87,11 @@ class SEMbright {
                 'Access-Control-Request-Origin': '*'
               }
             };
-            
-            fetch("http://52.201.217.116/dla/v010/users", requestOptions)
+console.log("----- preflight -----")
+            fetch("https://52.201.217.116/dla/v010/users", requestOptions)
               .then(response => response.text())
               .then(result => console.log(result))
               .catch(error => console.log('error', error));            
-
-
           }
         })
       })
