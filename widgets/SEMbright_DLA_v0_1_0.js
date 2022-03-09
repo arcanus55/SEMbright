@@ -59,47 +59,93 @@ class SEMbright {
     constructor( _d, _aQ ) {
         this._d = _d; this._aQ = _aQ
         this.bIsInit = false; this.bIsPause = false
+        this.sToken = ""
+        this.baseUrl = "http://52.201.217.116"
     }
     preInit (){
-      //  Request CSS (gh-pages?)
-      //  If N55 else request N55
-      //  Might want to point to the CDN at some point
-      sembUtils.fAsyncJS( document, "SEMbright_DLA_v0_1_0.css", false, function(){
-        sembUtils.fAsyncJS( document, "https://arcanus55.github.io/neodigm55/dist/neodigm55_v1_9.js", true, function(){
-        sembUtils.fAsyncJS( document, "https://arcanus55.github.io/neodigm55/dist/neodigm55_v1_9.css", false, function(){
-          if( doDOMContentLoaded ){
-            doDOMContentLoaded()
-            if( neodigmSodaPop ) neodigmSodaPop.autoOpen("semb--wdla__id")
-
-            var formdata = new FormData();
-            formdata.append("first_name", "Moxy");
-            formdata.append("email", "dduck@pocketlint2.com");
-            formdata.append("password", "swordfish");
-            formdata.append("primary_domain", "www.pocketlint2.com");
-            formdata.append("last_name", "duck");
-            
-            var requestOptions = {
-              method: 'POST',
-              body: formdata,
-              redirect: 'follow',
-              headers: {
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Request-Origin': '*'
+      //  TODO Might want to point to the CDN at some point
+      sembUtils.fAsyncJS( document, "SEMbright_DLA_v0_1_0.css", false, function(){  //  Request CSS (gh-pages?)
+        if( typeof neodigmOpt != "undefined" ){  //  If N55 else request N55
+          if( neodigmSodaPop ) neodigmSodaPop.autoOpen("semb--wdla__id")
+        }else{
+          sembUtils.fAsyncJS( document, "https://arcanus55.github.io/neodigm55/dist/neodigm55_v1_9.js", true, function(){
+            sembUtils.fAsyncJS( document, "https://arcanus55.github.io/neodigm55/dist/neodigm55_v1_9.css", false, function(){
+              if( doDOMContentLoaded ){
+                doDOMContentLoaded()
+                if( neodigmSodaPop ) neodigmSodaPop.autoOpen("semb--wdla__id")
               }
-            };
-console.log("----- preflight -----")
-            fetch("https://52.201.217.116/dla/v010/users", requestOptions)
-              .then(response => response.text())
-              .then(result => console.log(result))
-              .catch(error => console.log('error', error));            
-          }
-        })
+            })
+          })
+        }
       })
-    })
     }
     init () {
         this.bIsInit = true
         return this
+    }
+    doCreateUser (){
+      var _that = this
+      var myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+
+      var raw = JSON.stringify({
+        "first_name": document.getElementById("create_user_first_name").value,
+        "last_name": document.getElementById("create_user_last_name").value,
+        "email": document.getElementById("create_user_email").value,
+        "password": document.getElementById("create_user_password").value,
+        "primary_domain": document.getElementById("create_user_primary_domain").value,
+      });
+
+      var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+      };
+
+      fetch( _that.baseUrl + "/dla/v010/users", requestOptions)
+        .then(response => response.text())
+        .then(result => console.log(result))
+        .catch(error => console.log('error', error));
+
+    }        
+    doSignin ( sEmail, sPw ){
+      var _that = this
+      var myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+      var raw = JSON.stringify({
+        "email": this._d.getElementById("signin__email").value,
+        "password": this._d.getElementById("signin__password").value
+      });
+      var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+      };
+      fetch( _that.baseUrl + "/dla/v010/users/signin", requestOptions)
+        .then(response => response.text())
+        .then( function( result ){
+          return _that.sToken = JSON.parse(result).token;  //  local storage
+        } )
+        .catch(error => neodigmToast.q( JSON.stringify( error ), "danger"));
+    }
+    doSignout(){
+      var _that = this
+      var myHeaders = new Headers();
+      myHeaders.append("Authorization", "Bearer " + this.sToken );
+      myHeaders.append("Content-Type", "application/json");
+      //  neodigmToast.q( "token " + this.sToken, "primary");
+      var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: null,
+        redirect: 'follow'
+      };
+      fetch( _that.baseUrl + "/dla/v010/users/signout", requestOptions)
+        .then(response => response.text())
+        .then(result => console.log(result))
+        .catch(error => console.log('error', error));
     }
     pause (){ this.bIsPause = true; return this; }
     play (){ this.bIsPause = false; return this; }
@@ -112,9 +158,43 @@ document.addEventListener("DOMContentLoaded", function(ev) {
   const neodigmMU = `
    <template id="semb--wdla__id" data-n55-sodapop-modal="true" 
   data-n55-sodapop-size="medium">
+
+<form autocomplete="off" novalidate="" onsubmit="return false">
+  <input id="create_user_first_name" class="m5m-input" type="text" placeholder="First Name">
+  <input id="create_user_last_name" class="m5m-input" type="text" placeholder="Last Name">
+  <input id="create_user_email" class="m5m-input" type="email" placeholder="Work Email Address">
+  <input id="create_user_password" class="m5m-input" type="password" placeholder="Password">
+  <input id="create_user_primary_domain" class="m5m-input" type="text" placeholder="Primary Domain">
+</form>
+<div class="h-center">
+  <br>
+  <a id="cta__create-user--id" data-n55-enchanted-cta data-n55-enchanted-cta-size="small"
+  onclick="sembright.doCreateUser()" data-n55-theme="warning">
+  <span data-n55-wired4sound-mouseover="3">Create User</span><span>RAW?</span></a>
+</div>
+<hr>
+<form autocomplete="off" novalidate="" onsubmit="return false">
+      <input id="signin__email" name="signin__email" class="m5m-input" type="email" placeholder="Email Address" value="dduck@pocketlint3.com">
+      <input id="signin__password" name="signin__password" class="m5m-input" type="password" placeholder="password">
+</form>
+
+<div class="h-center">
+  <br>
+  <a id="cta__signin--id" data-n55-enchanted-cta data-n55-enchanted-cta-size="small"
+  onclick="sembright.doSignin()" data-n55-theme="primary">
+  <span data-n55-wired4sound-mouseover="3">Sign In</span><span>Login</span></a>
+  <br>
+  <a id="cta__signout--id" data-n55-enchanted-cta data-n55-enchanted-cta-size="small"
+  onclick="sembright.doSignout()" data-n55-theme="info">
+  <span data-n55-wired4sound-mouseover="3">Sign Out</span><span>Logout</span></a>
+</div>  
   
-  YOUR CONTENT HERE
-  
+<section class="h-center">
+  <a id="cta__close--id" data-n55-enchanted-cta data-n55-enchanted-cta-size="small"
+  onclick="neodigmSodaPop.close()" data-n55-theme="secondary" data-n55-wired4sound-click="8">
+  <span data-n55-wired4sound-mouseover="3">Close</span><span>Exit</span></a>
+</section>
+
   </template>`;
   let eMU = document.createElement("output");
   eMU.innerHTML = neodigmMU;
@@ -122,5 +202,5 @@ document.addEventListener("DOMContentLoaded", function(ev) {
   setTimeout( ()=>{
     sembright.preInit()
     if( sembOpt.CONSOLE_LOG_VER ) console.log("%c SEMbright White-label Digital Landscape Audit ✨ v" + sembUtils.ver, "background: #000; color: #F5DF4D; font-size: 20px");
-  }, 5600)
+  }, 1600)
 });
