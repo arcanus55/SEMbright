@@ -117,7 +117,10 @@ class SEMbright {
         })
         .catch(error => neodigmToast.q( JSON.stringify( error ), "danger"));
 
-    }        
+    }
+    doCreateBrand (){
+
+    }
     doSignin ( sEmail, sPw ){
       var _that = this
       var myHeaders = new Headers();
@@ -171,8 +174,8 @@ let sembright = new SEMbright( document, ["neodigm-qqqq"] )
 
 document.addEventListener("DOMContentLoaded", function(ev) {
   const neodigmMU = `
-   <template id="semb--wdla__id" data-n55-sodapop-modal="true" 
-  data-n55-sodapop-size="medium">
+<template id="semb--wdla__id" data-n55-sodapop-modal="true" 
+data-n55-sodapop-size="medium">
 
 <form autocomplete="off" novalidate="" onsubmit="return false">
   <input id="create_user_first_name" class="semb-input" type="text" placeholder="* First Name">
@@ -183,10 +186,11 @@ document.addEventListener("DOMContentLoaded", function(ev) {
 </form>
 <div class="h-center">
   <br>
-  <a id="cta__create-user--id" data-n55-enchanted-cta data-n55-enchanted-cta-size="small"
-  onclick="sembright.doCreateUser()" data-n55-theme="warning">
+  <a id="cta__create-user--id" data-n55-enchanted-cta data-n55-enchanted-cta-size="medium"
+  onclick="sembright.doCreateUser()" data-n55-theme="brand">
   <span data-n55-wired4sound-mouseover="3">Create New Account</span><span>Submit</span></a>
 </div>
+
 <hr>
 <form autocomplete="off" novalidate="" onsubmit="return false">
       <input id="signin__email" name="signin__email" class="semb-input" type="email" placeholder="Email Address" value="dduck@pocketlint3.com">
@@ -202,15 +206,39 @@ document.addEventListener("DOMContentLoaded", function(ev) {
   <a id="cta__signout--id" data-n55-enchanted-cta data-n55-enchanted-cta-size="small"
   onclick="sembright.doSignout()" data-n55-theme="info">
   <span data-n55-wired4sound-mouseover="3">Sign Out</span><span>Logout</span></a>
-</div>  
-  
+</div>
+
+<hr>
+
+<form autocomplete="off" novalidate="" onsubmit="return false">
+  <input id="create_brand_logo" class="semb-input" type="text" placeholder="Logo">
+  <input id="create_brand_logo_thumb" class="semb-input" type="text" placeholder="Logo_thumb">
+  <input id="create_brand_color_primary" class="semb-input" type="text" placeholder="Color primary">
+  <input id="create_brand_color_secondary" class="semb-input" type="text" placeholder="Color secondary">
+  <input id="create_brand_color_success" class="semb-input" type="text" placeholder="Color success">
+  <input id="create_brand_color_danger" class="semb-input" type="text" placeholder="Color danger">
+  <input id="create_brand_color_warning" class="semb-input" type="text" placeholder="Color warning">
+  <input id="create_brand_color_info" class="semb-input" type="text" placeholder="Color info">
+  <input id="create_brand_verbiage_markup" class="semb-input" type="text" placeholder="Verbiage markup">
+  <input id="create_brand_contact_markup" class="semb-input" type="text" placeholder="Contact markup">
+</form>
+
+<div class="h-center">
+  <br>
+  <a id="cta__create-user--id" data-n55-enchanted-cta data-n55-enchanted-cta-size="medium"
+  onclick="sembright.doCreateBrand()" data-n55-theme="brand">
+  <span data-n55-wired4sound-mouseover="3">Create New Brand</span><span>Submit</span></a>
+</div>
+
+<hr>
+
 <section class="h-center">
   <a id="cta__close--id" data-n55-enchanted-cta data-n55-enchanted-cta-size="small"
   onclick="neodigmSodaPop.close()" data-n55-theme="secondary" data-n55-wired4sound-click="8">
   <span data-n55-wired4sound-mouseover="3">Close</span><span>Exit</span></a>
 </section>
 
-  </template>`;
+</template>`;
   let eMU = document.createElement("output");
   eMU.innerHTML = neodigmMU;
   document.body.appendChild(eMU);
