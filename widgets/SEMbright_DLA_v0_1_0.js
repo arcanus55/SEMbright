@@ -60,7 +60,7 @@ class SEMbright {
         this._d = _d; this._aQ = _aQ
         this.bIsInit = false; this.bIsPause = false
         this.sToken = ""
-        this.baseUrl = "http://52.201.217.116"
+        this.baseUrl = "http://52.201.217.116";//"http://api.sembright.com";//
     }
     preInit (){
       //  TODO Might want to point to the CDN at some point
@@ -105,8 +105,17 @@ class SEMbright {
 
       fetch( _that.baseUrl + "/dla/v010/users", requestOptions)
         .then(response => response.text())
-        .then(result => console.log(result))
-        .catch(error => console.log('error', error));
+        .then( function(result){
+          result = JSON.parse( result )
+          if( result.errors ){
+            for(  const errMsg in result.errors ){
+              result.errors[errMsg].forEach( ( errMsgTxt ) => { neodigmToast.q( errMsgTxt, "danger" ) })
+            }
+          }else{
+            neodigmToast.q( "Account Created", "success" )
+          }
+        })
+        .catch(error => neodigmToast.q( JSON.stringify( error ), "danger"));
 
     }        
     doSignin ( sEmail, sPw ){
@@ -126,26 +135,32 @@ class SEMbright {
       fetch( _that.baseUrl + "/dla/v010/users/signin", requestOptions)
         .then(response => response.text())
         .then( function( result ){
+          if( neodigmToast ) neodigmToast.q("You are now|Signed In", "success")
           return _that.sToken = JSON.parse(result).token;  //  local storage
         } )
         .catch(error => neodigmToast.q( JSON.stringify( error ), "danger"));
     }
     doSignout(){
-      var _that = this
-      var myHeaders = new Headers();
-      myHeaders.append("Authorization", "Bearer " + this.sToken );
-      myHeaders.append("Content-Type", "application/json");
-      //  neodigmToast.q( "token " + this.sToken, "primary");
-      var requestOptions = {
-        method: 'POST',
-        headers: myHeaders,
-        body: null,
-        redirect: 'follow'
-      };
-      fetch( _that.baseUrl + "/dla/v010/users/signout", requestOptions)
-        .then(response => response.text())
-        .then(result => console.log(result))
-        .catch(error => console.log('error', error));
+      if( this.sToken ){
+        var _that = this
+        var myHeaders = new Headers();
+        myHeaders.append("Authorization", "Bearer " + this.sToken );
+        myHeaders.append("Content-Type", "application/json");
+        //  neodigmToast.q( "token " + this.sToken, "primary");
+        var requestOptions = {
+          method: 'POST',
+          headers: myHeaders,
+          body: null,
+          redirect: 'follow'
+        };
+        fetch( _that.baseUrl + "/dla/v010/users/signout", requestOptions)
+          .then(response => response.text())
+          .then(result => _that.sToken = "")
+          .catch(error => neodigmToast.q( JSON.stringify( error ), "danger"));
+        if( neodigmToast ) neodigmToast.q("You are now|Signed Out", "success")
+      }else{
+        if( neodigmToast ) neodigmToast.q("You are not|Signed in", "danger")
+      }
     }
     pause (){ this.bIsPause = true; return this; }
     play (){ this.bIsPause = false; return this; }
@@ -160,22 +175,22 @@ document.addEventListener("DOMContentLoaded", function(ev) {
   data-n55-sodapop-size="medium">
 
 <form autocomplete="off" novalidate="" onsubmit="return false">
-  <input id="create_user_first_name" class="m5m-input" type="text" placeholder="First Name">
-  <input id="create_user_last_name" class="m5m-input" type="text" placeholder="Last Name">
-  <input id="create_user_email" class="m5m-input" type="email" placeholder="Work Email Address">
-  <input id="create_user_password" class="m5m-input" type="password" placeholder="Password">
-  <input id="create_user_primary_domain" class="m5m-input" type="text" placeholder="Primary Domain">
+  <input id="create_user_first_name" class="semb-input" type="text" placeholder="* First Name">
+  <input id="create_user_last_name" class="semb-input" type="text" placeholder="Last Name">
+  <input id="create_user_email" class="semb-input" type="email" placeholder="* Work Email Address">
+  <input id="create_user_password" class="semb-input" type="password" placeholder="* Password">
+  <input id="create_user_primary_domain" class="semb-input" type="text" placeholder="* Primary Domain">
 </form>
 <div class="h-center">
   <br>
   <a id="cta__create-user--id" data-n55-enchanted-cta data-n55-enchanted-cta-size="small"
   onclick="sembright.doCreateUser()" data-n55-theme="warning">
-  <span data-n55-wired4sound-mouseover="3">Create User</span><span>RAW?</span></a>
+  <span data-n55-wired4sound-mouseover="3">Create New Account</span><span>Submit</span></a>
 </div>
 <hr>
 <form autocomplete="off" novalidate="" onsubmit="return false">
-      <input id="signin__email" name="signin__email" class="m5m-input" type="email" placeholder="Email Address" value="dduck@pocketlint3.com">
-      <input id="signin__password" name="signin__password" class="m5m-input" type="password" placeholder="password">
+      <input id="signin__email" name="signin__email" class="semb-input" type="email" placeholder="Email Address" value="dduck@pocketlint3.com">
+      <input id="signin__password" name="signin__password" class="semb-input" type="password" placeholder="password">
 </form>
 
 <div class="h-center">
