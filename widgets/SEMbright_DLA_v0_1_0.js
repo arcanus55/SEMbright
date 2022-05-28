@@ -60,7 +60,7 @@ class SEMbright {
         this._d = _d; this._aQ = _aQ
         this.bIsInit = false; this.bIsPause = false
         this.sToken = ""
-        this.baseUrl = "http://api.sembright.com";//"http://52.201.217.116";//
+        this.baseUrl = "https://api.sembright.com";//"http://52.201.217.116";//
     }
     preInit (){
       //  TODO Might want to point to the CDN at some point
