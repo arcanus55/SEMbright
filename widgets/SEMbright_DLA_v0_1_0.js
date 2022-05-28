@@ -68,8 +68,8 @@ class SEMbright {
         if( typeof neodigmOpt != "undefined" ){  //  If N55 else request N55
           if( neodigmSodaPop ) neodigmSodaPop.autoOpen("semb--wdla__id")
         }else{
-          sembUtils.fAsyncJS( document, "https://arcanus55.github.io/neodigm55/dist/neodigm55_v1_9.js", true, function(){
-            sembUtils.fAsyncJS( document, "https://arcanus55.github.io/neodigm55/dist/neodigm55_v1_9.css", false, function(){
+          sembUtils.fAsyncJS( document, "https://arcanus55.github.io/neodigm55/dist/neodigm55_v2_1.js", true, function(){
+            sembUtils.fAsyncJS( document, "https://arcanus55.github.io/neodigm55/dist/neodigm55_v2_1.css", false, function(){
               if( doDOMContentLoaded ){
                 doDOMContentLoaded()
                 if( neodigmSodaPop ) neodigmSodaPop.autoOpen("semb--wdla__id")
