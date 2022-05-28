@@ -9,7 +9,7 @@ let sembOpt = {
   SEMB_DEBUG_lOG: false
 }
 
-if( typeof sembOptCustom != 'undefined' ){
+if( typeof sembOptCustom != "undefined" ){
     for( cnfgProp in sembOptCustom ){  //  Import Custom Objects props if exists
       sembOpt[ cnfgProp ] = sembOptCustom[ cnfgProp ]
     }
