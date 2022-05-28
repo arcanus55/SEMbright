@@ -60,7 +60,7 @@ class SEMbright {
         this._d = _d; this._aQ = _aQ
         this.bIsInit = false; this.bIsPause = false
         this.sToken = ""
-        this.baseUrl = "http://52.201.217.116";//"http://api.sembright.com";//
+        this.baseUrl = "http://api.sembright.com";//"http://52.201.217.116";//
     }
     preInit (){
       //  TODO Might want to point to the CDN at some point
@@ -109,6 +109,7 @@ class SEMbright {
           result = JSON.parse( result )
           if( result.errors ){
             for(  const errMsg in result.errors ){
+              neodigmEnchantedCTA.flashTheme("danger")
               result.errors[errMsg].forEach( ( errMsgTxt ) => { neodigmToast.q( errMsgTxt, "danger" ) })
             }
           }else{
@@ -116,7 +117,6 @@ class SEMbright {
           }
         })
         .catch(error => neodigmToast.q( JSON.stringify( error ), "danger"));
-
     }
     doCreateBrand (){
 
@@ -245,5 +245,5 @@ data-n55-sodapop-size="medium">
   setTimeout( ()=>{
     sembright.preInit()
     if( sembOpt.CONSOLE_LOG_VER ) console.log("%c SEMbright White-label Digital Landscape Audit ✨ v" + sembUtils.ver, "background: #000; color: #F5DF4D; font-size: 20px");
-  }, 1600)
+  }, 2e3)
 });
