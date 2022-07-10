@@ -61,7 +61,7 @@ main > section > QQQQQarticle {
     
     margin: 0 auto;
 }
-main > section.sec-inverse__gray {
+section.sec-inverse__gray {
     background-color: #f2f2f2;
 }
 
