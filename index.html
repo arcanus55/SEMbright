@@ -99,7 +99,8 @@
                             <article>
 
                                 
-<section class="pfmf-grid pfmf-grid__100 readable__caption">
+<section id="typeOn1" class="pfmf-grid pfmf-grid__100 readable__caption"
+onclick="NeodigmClaire.doConfetti('#typeOn1')">
     <div>
         <article class="h-bg__stripe" style="min-height: 128px;text-align: center;padding: 16px 8px;">
             <div class="l-rndText">
@@ -140,7 +141,7 @@
 
 <neodigm-parallax data-n55-parallax="img/sem2.jpg"
 data-n55-parallax-size="small"
-onmouseenter='NeodigmClaire.doWaxOn("neodigm-parallax", ["info","warning","marcom"], "circle", .8)'>
+onmouseenter='NeodigmClaire.doWaxOn("neodigm-parallax", ["info","warning","primary","marcom"], "circle", .8)'>
     <section>
         <aside class="h-center" onclick="olark('api.box.expand')">
             <a id="cta-paral" data-n55-enchanted-cta data-n55-wired4sound-click="5"
@@ -229,9 +230,7 @@ NeodigmClaire.showCanv('neodigm-sodapop').initCanvOff('neodigm-sodapop').waxOff(
     "interactive dashboards",
     "immersive personalized",
     "data-driven",
-    "enchanted ux",
-    ];
-      
+    "enchanted ux"];
       
       const el = document.querySelector('.rndText');
       const fx = new neodigmRandText(el);
