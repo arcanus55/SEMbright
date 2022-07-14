@@ -32,23 +32,34 @@ a { -webkit-tap-highlight-color: rgba(0,0,0,0); outline: none; user-select: none
 /*  lgo  */
 .lgo {
     font-family: 'Comfortaa', cursive;
-    font-size: 44px; color: var( --m5lc-theme-info );
+    font-size: 38px; color: var( --m5lc-theme-info );
     margin-top: 32px;
 }
 .lgo > span:nth-of-type(1) { font-weight: 500;}
 .lgo > span:nth-of-type(2) { font-weight: 300;}
 
 /*  type  */
-h1, h2, h3 ,h4{
-    font-family: 'Roboto', sans-serif;
-    font-size: 32px; color: #000;
-    font-weight: 100;
+h1, h2, h3 ,h4, p {
+    font-family: 'Roboto', sans-serif; font-weight: 100;
     margin: 8px 0; padding: 1px;
 }
-h2 { color: var( --m5lc-theme-info-alt ); font-size: 28px;}
-h3 { color: var( --m5lc-theme-info-alt ); font-size: 22px;}
-h4 { color: var( --m5lc-theme-info-alt ); font-size: 20px;}
+h1 {font-size: 32px;}
+h2 {font-size: 28px;}
+h3 {font-size: 22px;}
+h4 {font-size: 20px;}
 p  { margin: 8px 0; padding: 1px; }
+
+[data-pref-scheme="light"] h1,
+[data-pref-scheme="light"] h2,
+[data-pref-scheme="light"] h3,
+[data-pref-scheme="light"] h4 {color: var( --m5lc-theme-info-alt );}
+[data-pref-scheme="light"] p {color: var( --m5lc-theme-info-alt );}
+
+[data-pref-scheme="dark"] h1,
+[data-pref-scheme="dark"] h2,
+[data-pref-scheme="dark"] h3,
+[data-pref-scheme="dark"] h4,
+[data-pref-scheme="dark"] p {color: var( --m5lc-theme-info );} 
 
 .txt-readable {
     font-family: 'Roboto', sans-serif;
@@ -130,6 +141,7 @@ section.pfmf-grid > div > article.pfmf-crd--black {
 /* Pan Fried Monkey Fisticufs grid end */
 
 /* Formz */
+neodigm-sodapop, neodigm-sodapop > * {background-color: #dfebc0;}
 input.semb-input, textarea.semb-input {
     display: block;
     color: #383838;
