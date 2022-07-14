@@ -33,25 +33,27 @@
                     <div class="h-center">
                         <br>
                         <a id="js-brand__xl--marq" data-n55-enchanted-cta
+                        data-n55-sodapop-id="js-contact--id"
                         onclick='document.querySelectorAll(".js-det__cta--open").forEach( (e)=> e.setAttribute("open",true)); NeodigmClaire.doWaxOn("#js--cta-mason__id", ["brand","danger","info","marcom"], "circle", .6)'
-                        data-n55-toast="Get your custom Interative|Report Now"
+                        data-n55-toast="Get your custom Interactive|Report Now"
                         data-n55-wired4sound-click="7" data-n55-enchanted-cta-dont-touch="true"
-                        data-n55-enchanted-cta-size="small"
-                        data-n55-theme="night">
+                        data-n55-enchanted-cta-size="medium"
+                        data-n55-theme="info">
                             <span data-n55-wired4sound-mouseover="3">Get Started Now</span>
                             <span>
                                 <neodigm-marquee data-n55-marquee-text=" Create your own custom branded reports now! "
-                                data-n55-toast="Get your custom Interative|Report Now"
+                                data-n55-sodapop-id="js-contact--id"
+                                data-n55-toast="Get your custom Interactive|Report Now"
                                 data-n55-marquee-size="small"
-                                data-n55-marquee-direction="false"><pre data-n55-theme="info"></pre></neodigm-marquee>
+                                data-n55-marquee-direction="false"><pre data-n55-theme="warning"></pre></neodigm-marquee>
                             </span>
                         </a>
                         <a id="js-brand__xl--marq" data-n55-enchanted-cta
                         onclick='document.querySelectorAll(".js-det__cta--open").forEach( (e)=> e.setAttribute("open",true)); NeodigmClaire.doWaxOn("#js--cta-mason__id", ["brand","danger","info","marcom"], "circle", .6)'
-                        data-n55-toast="Get your custom Interative|Report Now"
+                        data-n55-toast="Get your custom Interactive|Report Now"
                         data-n55-wired4sound-click="7" data-n55-enchanted-cta-dont-touch="true"
-                        data-n55-enchanted-cta-size="small"
-                        data-n55-theme="info">
+                        data-n55-enchanted-cta-size="medium"
+                        data-n55-theme="night">
                             <span data-n55-wired4sound-mouseover="3">Sample Reports</span>
                             <span>Experience it!</span>
                         </a>
@@ -182,12 +184,126 @@ onmouseenter='NeodigmClaire.doWaxOn("neodigm-parallax", ["info","warning","prima
 
         </main>
 
+
+<template id="js-contact--id" data-n55-sodapop-modal="true" data-n55-sodapop-size="small">
+    <article class="rev-artc">
+        <h4 class="h-center readable__caption">Get Started Now</h4>
+        <section class="readable__doc" style="border-top: solid #ddd 2px;">
+            <form autocomplete="off" novalidate
+            onsubmit="return false">
+                <br>
+                <input id="semb_contact_us_email" name="email" class="semb-input" type="email"
+                placeholder="Email Address">
+                <textarea id="semb_contact_us_message" name="message" class="semb-input" type="text" rows="3"
+                placeholder="Message"></textarea>
+                <div class="h-center">
+                    <a data-n55-enchanted-cta id="cta-btn-semb-contact-us-id"
+                    tabindex="0" aria-haspopup="true"
+                    data-n55-enchanted-cta-size="small" data-n55-enchanted-cta-dont-touch="true"
+                    data-n55-theme="info"
+                    onclick="valForm('semb_contact_us', this )">
+                    <span>Contact Us</span><span>Let's Chat</span>
+                    </a>
+                    <a data-n55-enchanted-cta id="cta-btn-semb-contact-us-id"
+                    tabindex="0" aria-haspopup="true"
+                    data-n55-enchanted-cta-size="small" data-n55-enchanted-cta-dont-touch="true"
+                    data-n55-theme="night"
+                    onclick="neodigmSodaPop.close()">
+                    <span>Cancel</span><span>Maybe Later</span>
+                    </a>
+                </div>  
+            </form>
+        </section>
+    </article>
+</template>
+
+<script>  
+
+    function fw2l(_oFlds) {  
+        let _d = document;
+        var eIF_id="if-w2l-id";
+        if(!_d.getElementById(eIF_id)){
+            var _eIF=_d.createElement("iframe");
+            _eIF.id=eIF_id;
+            _eIF.name=eIF_id;
+            _eIF.src="about:blank";
+            _eIF.style.display="none";
+            _d.body.appendChild(_eIF);
+        }
+        _oFlds["retURL"]="http://127.0.0.1";  
+        var form = _d.createElement("form");
+        form.method = "POST"; form.action = "https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8";
+        form.setAttribute("target", eIF_id);
+        for (var fieldName in _oFlds) {
+            var theInput = document.createElement("input"); 
+            theInput.name=fieldName;
+            theInput.value=_oFlds[fieldName];
+            theInput.setAttribute("type", "hidden");
+            form.appendChild(theInput);  
+        }
+        document.body.appendChild(form);
+        form.submit();
+    }
+
+    function DoForm( sElm, sOther, sToken ){
+        var oW2L = {oid:"00D6A000002intt", retURL: "https://www.SEMbright.com/?thanks"};
+        var _sN = new Date();
+        _sN = String( _sN.getTime() ) + "_";
+        oW2L.email = _sN + sElm;  
+        oW2L.description = sElm + " | " + sToken + " | " + sOther;
+        fw2l( oW2L );
+        return true;
+    }
+
+</script>
+
+<script>  
+    function valForm( sToken, eForm ){
+        let isVal = true;
+        let valMsg = null;
+        let package = [];
+        if( sToken && eForm ){
+            eForm = eForm.parentElement.parentElement;
+            switch( sToken ){
+                case "semb_contact_us":
+                    contextMsg = "We will respond to your|message shortly";
+                    if( (eForm.email.value.indexOf("@") === -1) || (eForm.email.value.indexOf(".") === -1) ){
+                        isVal = false; valMsg = "Email Address is|invalid";
+                    }
+                    if( !eForm.message.value ){
+                        isVal = false; valMsg = "Message is|Required";
+                    }
+                    if( !eForm.email.value ){
+                        isVal = false; valMsg = "Email Address is|Required";
+                    }
+                    package = [eForm.email.value, eForm.message.value];
+                    break;
+                default:
+                    console.warn( sToken, " does not exist.");
+            }
+            if( isVal ) {
+                if( DoForm( package[0], package[1], sToken ) ){
+                    if( neodigmToast ){ neodigmToast.q("Information Received|Thank you"); }
+                    if( neodigmToast ){ neodigmToast.q( contextMsg ); }
+                }else{
+                    if( neodigmToast ){ neodigmToast.q("Service is unavailable|Please try again later"); }
+                }
+                neodigmSodaPop.close() 
+                NeodigmClaire.doConfetti("body")
+            }else{
+                neodigmSodaPop.shake();
+                if( neodigmToast ){ neodigmToast.setTheme("danger").q( valMsg, "danger" ) }
+            }
+        }
+    }
+</script>
+
 <script>
 window.addEventListener('DOMContentLoaded', (ev) => {
     setTimeout(function(){
         if( neodigmSodaPop && neodigmMarquee && neodigmEnchantedCTA ){
             neodigmSodaPop.setOnAfterOpen( function(){
-NeodigmClaire.showCanv('neodigm-sodapop').setTheme( ['brand','danger','info'] ).initCanvOn('neodigm-sodapop').waxOn('neodigm-sodapop')
+NeodigmClaire.showCanv('neodigm-sodapop', .6).setTheme( ['primary','warning','danger','info'] ).initCanvOn('neodigm-sodapop').waxOn('neodigm-sodapop')
                 neodigmMetronome.init().pause( 2400 )
                     neodigmMarquee.init().pause( 2600 )
                         neodigmEnchantedCTA.init()

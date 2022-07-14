@@ -26,10 +26,8 @@ a { -webkit-tap-highlight-color: rgba(0,0,0,0); outline: none; user-select: none
 .h-fade { opacity: 0.4; filter: blur(8px); transition: .88s filter linear;}
 
 /*  neodigm 55 overrides  */
-.l-snackbar .snackbar__cont {
-    background: linear-gradient(45deg, var(--m5lc-theme-info) 0%, var(--m5lc-theme-info-alt) 100%) !important;
-    box-shadow: inset var(--m5lc-theme-info) 0 0 6px 2px !important;
-}
+.l-snackbar .snackbar__cont[data-n55-theme='brand'] { box-shadow: inset var(--neodigm-theme-info) 0 0 6px 2px; background: linear-gradient(45deg, var(--neodigm-theme-info) 0%, var(--neodigm-theme-info-alt) 100%) !important; }
+.l-snackbar .snackbar__cont[data-n55-theme='brand'] .snackbar__progbar { background-color: var(--neodigm-theme-info-alt) !important }
 
 /*  lgo  */
 .lgo {
@@ -41,7 +39,7 @@ a { -webkit-tap-highlight-color: rgba(0,0,0,0); outline: none; user-select: none
 .lgo > span:nth-of-type(2) { font-weight: 300;}
 
 /*  type  */
-h1, h2, h3 {
+h1, h2, h3 ,h4{
     font-family: 'Roboto', sans-serif;
     font-size: 32px; color: #000;
     font-weight: 100;
@@ -49,6 +47,7 @@ h1, h2, h3 {
 }
 h2 { color: var( --m5lc-theme-info-alt ); font-size: 28px;}
 h3 { color: var( --m5lc-theme-info-alt ); font-size: 22px;}
+h4 { color: var( --m5lc-theme-info-alt ); font-size: 20px;}
 p  { margin: 8px 0; padding: 1px; }
 
 .txt-readable {
@@ -129,6 +128,17 @@ section.pfmf-grid > div > article.pfmf-crd--black {
     section.pfmf-grid { width: 86%; }
 }
 /* Pan Fried Monkey Fisticufs grid end */
+
+/* Formz */
+input.semb-input, textarea.semb-input {
+    display: block;
+    color: #383838;
+    font-family: 'Montserrat', sans-serif; font-size: 18px;
+    line-height: 1.1;
+    border: solid 1px #585858; border-radius: 20px;
+    width: 76%;
+    margin: 8px auto; padding: 10px 8px;
+}
 
 /*  Bullets  */
 .l-bullets {
