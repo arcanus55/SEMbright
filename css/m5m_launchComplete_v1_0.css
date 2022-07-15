@@ -49,17 +49,18 @@ h3 {font-size: 22px;}
 h4 {font-size: 20px;}
 p  { margin: 8px 0; padding: 1px; }
 
+
 [data-pref-scheme="light"] h1,
 [data-pref-scheme="light"] h2,
 [data-pref-scheme="light"] h3,
 [data-pref-scheme="light"] h4 {color: var( --m5lc-theme-info-alt );}
-[data-pref-scheme="light"] p {color: var( --m5lc-theme-info-alt );}
+[data-pref-scheme="light"] p {color: #000;}
 
 [data-pref-scheme="dark"] h1,
 [data-pref-scheme="dark"] h2,
 [data-pref-scheme="dark"] h3,
-[data-pref-scheme="dark"] h4,
-[data-pref-scheme="dark"] p {color: var( --m5lc-theme-info );} 
+[data-pref-scheme="dark"] h4 {color: var( --m5lc-theme-info );} 
+[data-pref-scheme="dark"] p {color: #fff} 
 
 .txt-readable {
     font-family: 'Roboto', sans-serif;
